@@ -9,7 +9,7 @@
         this.uniqueId = '';
         this.totalItems = -1;
         this.postOffset = 0;
-        this.postsPerPage = 50;
+        this.postsPerPage = 20;
         this.posts = [];
         this.tags = {};
         this.scriptCounter = 0;
@@ -17,7 +17,7 @@
         this.enqueued = 0;
         this.batchInterval = false;
         this.batchSize = 7;
-        this.batchTimeoutInMs = 2000;
+        this.batchTimeoutInMs = 200000;
 
         /**
         * Initialize the tag fetcher.
@@ -170,7 +170,7 @@
         * Enqueues a script to the body element.
         * (The script will be removed once everything has been loaded)
         *
-        * @param  {int} limit Optional limit, default: 50, max: 50
+        * @param  {int} limit Optional limit, default: 20, max: 20
         * @param  {int} offset Optional offset
         *
         * @return void.
@@ -240,7 +240,7 @@
             }
 
             if (!id) {
-                id = Math.random()*100000;
+                id = Math.random()*10000000;
             }
 
             this.callbacks[event][id] = callback;
