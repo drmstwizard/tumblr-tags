@@ -16,8 +16,8 @@
         this.processed = 0;
         this.enqueued = 0;
         this.batchInterval = false;
-        this.batchSize = 7;
-        this.batchTimeoutInMs = 90000000000000000000000000000;
+        this.batchSize = 15;
+        this.batchTimeoutInMs = 9000000000000000000000;
 
         /**
         * Initialize the tag fetcher.
@@ -184,7 +184,7 @@
             var id = this.uniqueId + '-' + this.scriptCounter;
             var script = document.createElement('script');
             script.id = id;
-            script.src = '//' + 'https://api.tumblr.com/v2/blog/' + this.username + '/posts' + this.uniqueId + '&num=' + limit + '&start=' + offset;
+            script.src = '//' + this.username + '.tumblr.com/api/read/json?callback=' + this.uniqueId + '&num=' + limit + '&start=' + offset;
 
             document.body.appendChild(script);
         };
