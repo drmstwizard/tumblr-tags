@@ -6,7 +6,7 @@
 
         this.username = '';
         this.domain = 'tumblr_tags';
-        this.uniqueId = '';
+        this.api_key = 'ii4TLRjfMoszcoDkrxBKUk5isHgx0ezQnJ8JWGntYIboVVigez';
         this.totalItems = -1;
         this.postOffset = 0;
         this.postsPerPage = 20;
@@ -15,9 +15,6 @@
         this.scriptCounter = 0;
         this.processed = 0;
         this.enqueued = 0;
-        this.batchInterval = false;
-        this.batchSize = 7;
-        this.batchTimeoutInMs = 200000;
 
         /**
         * Initialize the tag fetcher.
@@ -28,9 +25,7 @@
         */
         this.initalize = function(username) {
             this.username = username;
-            this.uniqueId = this.domain + '_' + Math.round(Math.random()*10000);
-            window[this.uniqueId] = this.handleItems.bind(this);
-        };
+            };
 
         /**
         * Starts loading all the scripts.
@@ -105,7 +100,7 @@
         * @return void.
         */
         this.removeScriptTags = function() {
-            var scripts = document.querySelectorAll("[id*='" + this.uniqueId + "-']");
+            var scripts = document.querySelectorAll("[id*='" + this.api_key + "-']");
             for(var i = 0; i < scripts.length; i++) {
                 scripts[i].parentNode.removeChild(scripts[i]);
             }
@@ -181,10 +176,10 @@
             
             this.enqueued++;
 
-            var id = this.uniqueId + '-' + this.scriptCounter;
+            var id = this.api_key + '-' + this.scriptCounter;
             var script = document.createElement('script');
             script.id = id;
-            script.src = '//' + this.username + '.tumblr.com/api/read/json?callback=' + this.uniqueId + '&num=' + limit + '&start=' + offset;
+            script.src = '//' + 'https://api.tumblr.com/v2/blog/' + this.username + this.api_key + '&num=' + limit + '&start=' + offset;
 
             document.body.appendChild(script);
         };
